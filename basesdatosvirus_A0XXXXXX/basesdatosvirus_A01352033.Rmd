@@ -1,0 +1,180 @@
+---
+title: "basesdatosvirus_A01352033"
+author: "Manuel Villalpando Linares"
+date: "2024-01-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## bases de datos de virus
+
+Fernanda Ponce Maciel A01799293
+Manuel Villalpando Linares A01352033
+
+```{r}
+library("seqinr")
+library("ggplot2")
+library("stringr")
+
+zika<-read.fasta("Zika.fasta")
+sarscovid<-read.fasta("COVID.fasta")
+wuhan<-read.fasta("wuhan.fasta")
+mers<-read.fasta("MECOVID.fasta")
+dengue<-read.fasta("dengue.fasta")
+
+length(zika[[1]])
+length(sarscovid[[1]])
+length(wuhan[[1]])
+length(mers[[1]])
+length(dengue[[1]])
+
+count(zika[[1]],1)
+count(sarscovid[[1]],1)
+count(wuhan[[1]],1)
+count(mers[[1]],1)
+count(dengue[[1]],1)
+
+head(zika[[1]])
+head(sarscovid[[1]])
+head(wuhan[[1]])
+head(mers[[1]])
+head(dengue[[1]])
+
+GC(zika[[1]])*100
+GC(sarscovid[[1]])*100
+GC(wuhan[[1]])*100
+GC(mers[[1]])*100
+GC(dengue[[1]])*100
+
+zika[[1]][c(1:10,(length(zika[[1]])-10):length(zika[[1]]))]
+comp(zika[[1]])[c(1:10,(length(zika[[1]])-10):length(zika[[1]]))]
+dengue[[1]][c(1:10,(length(dengue[[1]])-10):length(dengue[[1]]))]
+comp(dengue[[1]])[c(1:10,(length(dengue[[1]])-10):length(dengue[[1]]))]
+sarscovid[[1]][c(1:10,(length(sarscovid[[1]])-10):length(sarscovid[[1]]))]
+comp(sarscovid[[1]])[c(1:10,(length(sarscovid[[1]])-10):length(sarscovid[[1]]))]
+mers[[1]][c(1:10,(length(mers[[1]])-10):length(mers[[1]]))]
+comp(mers[[1]])[c(1:10,(length(mers[[1]])-10):length(mers[[1]]))]
+wuhan[[1]][c(1:10,(length(wuhan[[1]])-10):length(wuhan[[1]]))]
+comp(wuhan[[1]])[c(1:10,(length(wuhan[[1]])-10):length(wuhan[[1]]))]
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+tabla<-data.frame(
+  virus = rep(c("Dengue", "Middle E-COVID", "COVID","Wuhan-Hu-1",
+                "Zica"),each=4),
+  nucleotido=rep(c("Adenina","Citosina","Guanina",
+                   "Timina"),5),
+  Frecuencia = c(count(dengue[[1]],1), count(mers[[1]],1),
+                 count(sarscovid[[1]],1), count(wuhan[[1]],1),
+                 count(zika[[1]],1))
+)
+
+ggplot(data = tabla) +
+  geom_bar(aes(x=virus, y=Frecuencia, fill=nucleotido),
+           position="dodge",stat="identity")
+
+```
+
+## Parte 2: Segmentos del H1N1
+
+```{r}
+
+library("seqinr")
+library("ggplot2")
+library("stringr")
+
+PB2<-read.fasta("PB2.fasta")
+PB1<-read.fasta("PB1.fasta")
+PA<-read.fasta("PA.fasta")
+HA<-read.fasta("HA.fasta")
+NP<-read.fasta("NP.fasta")
+Na<-read.fasta("NA.fasta")
+M1<-read.fasta("M1.fasta")
+NSI<-read.fasta("NS1.fasta")
+
+length(PB2[[1]])
+length(PB1[[1]])
+length(PA[[1]])
+length(HA[[1]])
+length(NP[[1]])
+length(Na[[1]])
+length(M1[[1]])
+length(NSI[[1]])
+
+count(PB2[[1]],1)
+count(PB1[[1]],1)
+count(PA[[1]],1)
+count(HA[[1]],1)
+count(NP[[1]],1)
+count(Na[[1]],1)
+count(M1[[1]],1)
+count(NSI[[1]],1)
+
+head(PB2[[1]])
+head(PB1[[1]])
+head(PA[[1]])
+head(HA[[1]])
+head(NP[[1]])
+head(Na[[1]])
+head(M1[[1]])
+head(NSI[[1]])
+
+GC(PB2[[1]])*100
+GC(PB1[[1]])*100
+GC(PA[[1]])*100
+GC(HA[[1]])*100
+GC(NP[[1]])*100
+GC(Na[[1]])*100
+GC(M1[[1]])*100
+GC(NSI[[1]])*100
+
+PB2[[1]][c(1:10,(length(PB2[[1]])-10):length(PB2[[1]]))]
+comp(PB2[[1]])[c(1:10,(length(PB2[[1]])-10):length(PB2[[1]]))]
+PB1[[1]][c(1:10,(length(PB1[[1]])-10):length(PB1[[1]]))]
+comp(PB1[[1]])[c(1:10,(length(PB1[[1]])-10):length(PB1[[1]]))]
+PA[[1]][c(1:10,(length(PA[[1]])-10):length(PA[[1]]))]
+comp(PA[[1]])[c(1:10,(length(PA[[1]])-10):length(PA[[1]]))]
+HA[[1]][c(1:10,(length(HA[[1]])-10):length(HA[[1]]))]
+comp(HA[[1]])[c(1:10,(length(HA[[1]])-10):length(HA[[1]]))]
+NP[[1]][c(1:10,(length(NP[[1]])-10):length(NP[[1]]))]
+comp(NP[[1]])[c(1:10,(length(NP[[1]])-10):length(NP[[1]]))]
+Na[[1]][c(1:10,(length(Na[[1]])-10):length(Na[[1]]))]
+comp(Na[[1]])[c(1:10,(length(Na[[1]])-10):length(Na[[1]]))]
+M1[[1]][c(1:10,(length(M1[[1]])-10):length(M1[[1]]))]
+comp(M1[[1]])[c(1:10,(length(M1[[1]])-10):length(M1[[1]]))]
+NSI[[1]][c(1:10,(length(NSI[[1]])-10):length(NSI[[1]]))]
+comp(NSI[[1]])[c(1:10,(length(NSI[[1]])-10):length(NSI[[1]]))]
+```
+
+# Graficas
+Graficas de los nucleotidos de los segmentos del H1N1 en conjunto
+
+```{r}
+
+tabla<-data.frame(
+  virus = rep(c("PB2", "PB1", "PA","HA",
+                "NP","Na","M1","NSI"),each=4),
+  nucleotido=rep(c("Adenina","Citosina","Guanina",
+                   "Timina"),8),
+  Frecuencia = c(count(PB2[[1]],1), count(PB1[[1]],1),
+                 count(PA[[1]],1), count(HA[[1]],1),
+                 count(NP[[1]],1), count(Na[[1]],1),
+                 count(M1[[1]],1), count(NSI[[1]],1))
+)
+
+ggplot(data = tabla) +
+  geom_bar(aes(x=virus, y=Frecuencia, fill=nucleotido),
+           position="dodge",stat="identity")
+
+
+```
+
+

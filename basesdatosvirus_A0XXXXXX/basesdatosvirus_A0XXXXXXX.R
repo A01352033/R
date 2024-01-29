@@ -44,7 +44,7 @@ wuhan[[1]][c(1:10,(length(wuhan[[1]])-10):length(wuhan[[1]]))]
 comp(wuhan[[1]])[c(1:10,(length(wuhan[[1]])-10):length(wuhan[[1]]))]
 
 tabla<-data.frame(
-  virus = rep(c("Dengue", "Mers", "SARS-COV-2","wuHan",
+  virus = rep(c("Dengue", "Middle E-COVID", "COVID","Wuhan-Hu-1",
                 "Zica"),each=4),
   nucleotido=rep(c("Adenina","Citosina","Guanina",
                    "Timina"),5),
