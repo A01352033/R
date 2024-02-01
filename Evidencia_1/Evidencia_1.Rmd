@@ -95,7 +95,7 @@ cat("s10_contrasentido: ", head(s10_contrasentido), "...")
 
 # Graficar la frecuencia de las bases nitrogenadas
 tabla<-data.frame(
-  virus = rep(c("s1", "s2", "s3","s4","s5","s6","s7","s8","s9","s10"),each=4),
+  Variantes = rep(c("s1", "s2", "s3","s4","s5","s6","s7","s8","s9","s10"),each=4),
   nucleotido=rep(c("Adenina","Citosina","Guanina",
                    "Timina"),5),
   Frecuencia = c(count(s1[[1]],1), 
@@ -111,8 +111,33 @@ tabla<-data.frame(
 )
 
 ggplot(data = tabla) +
-  geom_bar(aes(x=virus, y=Frecuencia, fill=nucleotido),
+  geom_bar(aes(x=Variantes, y=Frecuencia, fill=nucleotido),
            position="dodge",stat="identity")
+
+# Graficar la frecuencia de las bases nitrogenadas
+tabla <- data.frame(
+  virus = rep(c("s1", "s2", "s3","s4","s5","s6","s7","s8","s9","s10"), each=4),
+  nucleotido = rep(c("Adenina","Citosina","Guanina", "Timina"), 5),
+  Frecuencia = c(count(s1[[1]], 1), 
+                 count(s2[[1]], 1),
+                 count(s3[[1]], 1), 
+                 count(s4[[1]], 1),
+                 count(s5[[1]], 1),
+                 count(s6[[1]], 1),
+                 count(s7[[1]], 1),
+                 count(s8[[1]], 1),
+                 count(s9[[1]], 1),
+                 count(s10[[1]], 1))
+)
+
+ggplot(data = tabla) +
+  geom_bar(aes(x = virus, y = Frecuencia, fill = nucleotido),
+           position = "stack", stat = "identity") +
+  labs(title = "Frecuencia de Bases Nitrogenadas por Variante del COVID-19",
+       x = "Variante",
+       y = "Frecuencia") +
+  theme_minimal()
+
 ```
 
 ## Including Plots
