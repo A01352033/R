@@ -1,0 +1,98 @@
+# Agregar librerias
+library("seqinr")
+library("ggplot2")
+library("stringr")
+
+# Leer secuencias de ADN del COVID-19
+s1<-read.fasta("wuhanhu1.fasta")
+s2<-read.fasta("sequence2.fasta")
+s3<-read.fasta("sequence3.fasta")
+s4<-read.fasta("sequence4.fasta")
+s5<-read.fasta("sequence5.fasta")
+s6<-read.fasta("sequence6.fasta")
+s7<-read.fasta("sequence7.fasta")
+s8<-read.fasta("sequence8.fasta")
+s9<-read.fasta("sequence9.fasta")
+s10<-read.fasta("sequence10.fasta")
+
+# Longitud de las secuencias
+length(s1[[1]])
+length(s2[[1]])
+length(s3[[1]])
+length(s4[[1]])
+length(s5[[1]])
+length(s6[[1]])
+length(s7[[1]])
+length(s8[[1]])
+length(s9[[1]])
+length(s10[[1]])
+
+# Contar las bases nitrogenadas
+count(s1[[1]],1)
+count(s2[[1]],1)
+count(s3[[1]],1)
+count(s4[[1]],1)
+count(s5[[1]],1)
+count(s6[[1]],1)
+count(s7[[1]],1)
+count(s8[[1]],1)
+count(s9[[1]],1)
+count(s10[[1]],1)
+
+# Calcular el contenido de G y C
+GC(s1[[1]])*100
+GC(s2[[1]])*100
+GC(s3[[1]])*100
+GC(s4[[1]])*100
+GC(s5[[1]])*100
+GC(s6[[1]])*100
+GC(s7[[1]])*100
+GC(s8[[1]])*100
+GC(s9[[1]])*100
+GC(s10[[1]])*100
+
+# Obtenemos la secuencia contrasentido de cada variante
+s1_contrasentido<-rev(comp(s1[[1]]))
+s2_contrasentido<-rev(comp(s2[[1]]))
+s3_contrasentido<-rev(comp(s3[[1]]))
+s4_contrasentido<-rev(comp(s4[[1]]))
+s5_contrasentido<-rev(comp(s5[[1]]))
+s6_contrasentido<-rev(comp(s6[[1]]))
+s7_contrasentido<-rev(comp(s7[[1]]))
+s8_contrasentido<-rev(comp(s8[[1]]))
+s9_contrasentido<-rev(comp(s9[[1]]))
+s10_contrasentido<-rev(comp(s10[[1]]))
+
+# Mostrar las secuencias contrasentido
+cat("s1_contrasentido: ", head(s1_contrasentido), "...")
+cat("s2_contrasentido: ", head(s2_contrasentido), "...")
+cat("s3_contrasentido: ", head(s3_contrasentido), "...")
+cat("s4_contrasentido: ", head(s4_contrasentido), "...")
+cat("s5_contrasentido: ", head(s5_contrasentido), "...")
+cat("s6_contrasentido: ", head(s6_contrasentido), "...")
+cat("s7_contrasentido: ", head(s7_contrasentido), "...")
+cat("s8_contrasentido: ", head(s8_contrasentido), "...")
+cat("s9_contrasentido: ", head(s9_contrasentido), "...")
+cat("s10_contrasentido: ", head(s10_contrasentido), "...")
+
+# Graficar la frecuencia de las bases nitrogenadas
+tabla<-data.frame(
+  virus = rep(c("s1", "s2", "s3","s4","s5","s6","s7","s8","s9","s10"),each=4),
+  nucleotido=rep(c("Adenina","Citosina","Guanina",
+                   "Timina"),5),
+  Frecuencia = c(count(s1[[1]],1), 
+                 count(s2[[1]],1),
+                 count(s3[[1]],1), 
+                 count(s4[[1]],1),
+                 count(s5[[1]],1),
+                 count(s6[[1]],1),
+                 count(s7[[1]],1),
+                 count(s8[[1]],1),
+                 count(s9[[1]],1),
+                 count(s10[[1]],1))
+)
+
+ggplot(data = tabla) +
+  geom_bar(aes(x=virus, y=Frecuencia, fill=nucleotido),
+           position="dodge",stat="identity")
+
